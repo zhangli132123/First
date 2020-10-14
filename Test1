@@ -1,0 +1,173 @@
+public class Animal {
+    private Integer Age;
+    private String Name;
+    private String Type;
+    private String Sex;
+
+    public Animal(Integer Age, String Name, String Type, String Sex) {
+        this.Age = Age;
+        this.Name = Name;
+        this.Type = Type;
+        this.Sex = Sex;
+    }
+
+    public void setAge(Integer age) {
+        Age = age;
+    }
+
+    public void setName(String name) {
+        Name = name;
+    }
+
+    public void setType(String type) {
+        Type = type;
+    }
+
+    public void setSex(String sex) {
+        Sex = sex;
+    }
+
+    public Integer getAge() {
+        return Age;
+    }
+
+
+    public String getName() {
+        return Name;
+    }
+
+
+    public String getType() {
+        return Type;
+    }
+
+    public String getSex() {
+        return Sex;
+    }
+
+    @Override
+    public String toString() {
+        return "Animal{" +
+                "Age=" + Age +
+                ", Name='" + Name + '\'' +
+                ", Type='" + Type + '\'' +
+                ", Sex='" + Sex + '\'' +
+                '}'+"\n";
+    }
+}
+
+
+
+
+
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+    public class animals {
+
+        public static<T> void main(String[] args) {
+
+            ArrayList<Animal> list=new ArrayList<Animal>();       //建立一个集合储存animal元素
+
+            Animal a = new Animal(6,"Jack","Dog","Boy");  //将一个animal储存至list集合中
+            Animal b = new Animal(1,"Peter","Cat","Boy");
+            Animal c = new Animal(2,"John","Dog","Boy");
+            list.add(a);
+            list.add(b);
+            list.add(c);
+            String operate = "a";       //默认operate为“a”
+
+            System.out.println("Choose:     Print     Delete     Add     Sort     Change     Close     Select");
+
+
+            boolean replace=false;
+            while(!replace) {
+                Scanner input = new Scanner(System.in);//创建一个键盘扫描类对象
+                System.out.print("请您输入内容:");
+                String _operate = input.next();
+                operate = _operate;
+                switch (operate) {
+                    case "Print":                                           //打印操作
+                        System.out.println(list);
+                        break;
+                    case "Delete":                                          //删除操作
+                        System.out.println("删除第几个动物信息:");
+                        Scanner delete = new Scanner(System.in);
+                        int number = delete.nextInt();
+                        list.remove(number-1);
+                        System.out.println(list);
+                        break;
+                    case "Add":                                              //增添操作
+                        Scanner add = new Scanner(System.in);
+                        System.out.println("请您依次输入所添加动物的品种，姓名，年龄，性别并按下回车键:");
+                        String _Type = add.next();
+                        String _Name = add.next();
+                        int _Age = add.nextInt();
+                        String _Sex = add.next();
+
+
+                        Animal e = new Animal(_Age, _Name, _Type, _Sex);
+                        list.add(e);
+                        System.out.println(list);
+                        break;
+                    case "Sort":
+                        Animal temp1;
+                        int temp2;
+                        for (int i = 0; i < 50; i++) {                //假设所有动物年龄不超过50岁
+                            for (int j = 0; j < list.size(); j++) {
+                                temp1 = list.get(j);
+                                temp2 = temp1.getAge();
+                                if (i == temp2) {
+                                    System.out.println(list.get(j));
+                                }
+                            }
+                        }
+                        break;
+
+                    case"Select":
+                        System.out.println("请根据动物的种类或名字或年龄或性别进行初次查询：");
+                        Scanner sca=new Scanner(System.in);
+                        T s = (T)sca.next();
+                        for (int i = 0; i < list.size(); i++) {
+                            Integer age = list.get(i).getAge();
+                            String name = list.get(i).getName();
+                            String sex = list.get(i).getSex();
+                            String type = list.get(i).getType();
+                            if (age.equals((Integer) s) || name.equals(s) || sex.equals(s) || type.equals(s)){
+                                System.out.println(list.get(i));
+                            }
+                        }
+                        break;
+
+                    case "Change":                                           //更改操作
+                        System.out.println("请输入想更改的元素号数:");
+                        Scanner Change = new Scanner(System.in);
+                        int Number = Change.nextInt();
+                        System.out.println("请输入年龄:");
+                        Scanner Change1 = new Scanner(System.in);
+                        int Text1 = Change1.nextInt();
+                        System.out.println("请输入名字:");
+                        Scanner Change2 = new Scanner(System.in);
+                        String Text2 = Change2.next();
+                        System.out.println("请输入品种:");
+                        Scanner Change3 = new Scanner(System.in);
+                        String Text3 = Change3.next();
+                        System.out.println("请输入性别:");
+                        Scanner Change4 = new Scanner(System.in);
+                        String Text4 = Change4.next();
+                        list.set(Number - 1, new Animal(Text1, Text2, Text3, Text4));
+                        System.out.println(list);
+                        break;
+                    case "Close":
+                        replace = true;
+                    default:
+                        System.out.println("Please input right operate!!!");
+
+
+                }
+            }
+
+        }
+
+    }
